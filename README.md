@@ -1,10 +1,7 @@
-# React+TS starter pack
+# React+Vite starter pack
 
 ## Main configurations
-
-- React 18 that supports both TypeScript & JavaScript out of the box
-  - You can use absolute imports, using `@` as `src` directory
-- Support for [ShadcnUI](https://ui.shadcn.com) & Tailwind CSS
+- You can use absolute imports, using `@` as `src` directory
 
 ## Usage
 
