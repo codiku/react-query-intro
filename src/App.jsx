@@ -1,17 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { PokemonList } from "@/pages/PokemonList";
 import { PokemonDetail } from "@/pages/PokemonDetail";
+import { PokemonList } from "@/pages/PokemonList";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ROUTES } from "./router";
-import { useQuery } from "@tanstack/react-query";
-import { AuthAPI } from "@/api/auth-api";
 
 export function App() {
 
-  useQuery({
-    queryKey: ["user"],
-    queryFn: AuthAPI.login,
-    staleTime: Infinity
-  });
 
   return (
     <BrowserRouter>

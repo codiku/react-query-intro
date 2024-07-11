@@ -4,15 +4,15 @@ export const PokemonAPI = {
   async fetchPokemons(page, perPage) {
     try {
       const response = await axios.get(
-        `http://localhost:3000/pokemons?_page=${page}&_per_page=${perPage}`
+        `http://localhost:3090/pokemons?_page=${page}&_per_page=${perPage}`
       );
-      return response.data.results;
+      return response.data.data;
     } catch (error) {
       throw Error("Error fetching pokemons");
     }
   },
   async fetchPokemon(id) {
-    const response = await axios.get(`http://localhost:3000/pokemons/${id}`);
+    const response = await axios.get(`http://localhost:3090/pokemons/${id}`);
     return response.data;
   },
 };
