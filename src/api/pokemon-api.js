@@ -1,10 +1,10 @@
 import axios from "axios";
 
 export const PokemonAPI = {
-  async fetchPokemons(limit, offset) {
+  async fetchPokemons(page, perPage) {
     try {
       const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
+        `http://localhost:3000/pokemons?_page=${page}&_per_page=${perPage}`
       );
       return response.data.results;
     } catch (error) {
@@ -12,7 +12,7 @@ export const PokemonAPI = {
     }
   },
   async fetchPokemon(id) {
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    const response = await axios.get(`http://localhost:3000/pokemons/${id}`);
     return response.data;
   },
 };
