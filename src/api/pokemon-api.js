@@ -1,4 +1,11 @@
-import axios from "axios";
+import originalAxios from "axios";
+
+export const axios = originalAxios.create();
+axios.interceptors.response.use(async (response) => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  return response;
+});
+
 
 export const PokemonAPI = {
   async fetchPokemons(page, perPage) {
@@ -12,7 +19,31 @@ export const PokemonAPI = {
     }
   },
   async fetchPokemon(id) {
-    const response = await axios.get(`http://localhost:3090/pokemons/${id}`);
-    return response.data;
+    try {
+      const response = await axios.get(`http://localhost:3090/pokemons/${id}`);
+      return response.data;
+    } catch (error) {
+      throw Error("Error fetching pokemon");
+    }
+  },
+  async fetchReviewsByPokemonId(id) {
+    try {
+      const response = await axios.get(`http://localhost:3090/reviews?pokemonId=${id}`);
+      return response.data;
+    } catch (error) {
+      throw Error("Error fetching reviews");
+    }
+  },
+  async addReview(pokemonId, content) {
+    try {
+      const response = await axios.post(`http://localhost:3090/reviews`, {
+        pokemonId,
+        content,
+        author:"me"
+      });
+      return response.data;
+    } catch (error) {
+      throw Error("Error adding review");
+    }
   },
 };

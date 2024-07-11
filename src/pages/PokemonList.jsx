@@ -19,7 +19,7 @@ export const PokemonList = () => {
 
   console.log("pokemon list", pokemonList)
   const loadNextPage = async () => {
-    if (page < MAX_PAGE ) {
+    if (page < MAX_PAGE) {
       setPage(page => page + 1);
     }
   };
@@ -57,11 +57,11 @@ export const PokemonList = () => {
         </List>
         <HStack spacing={4}>
           <Button onClick={loadPreviousPage} isDisabled={page === 1}>Load previous page</Button>
-          <Button onClick={loadNextPage} isDisabled={page == MAX_PAGE }>Load next page</Button>
+          <Button onClick={loadNextPage} isDisabled={page == MAX_PAGE}>Load next page</Button>
         </HStack>
         <Box mt={4}>
           {[...Array(MAX_PAGE)].map((_, index) => (
-            <Button variant={page === index+1 ? "solid" : "link"} key={index} onClick={() => setPage(index+1)} w={"24"}>
+            <Button variant={page === index + 1 ? "solid" : "link"} key={index} onClick={() => setPage(index + 1)} w={"24"}>
               {index + 1}
             </Button>
           ))}

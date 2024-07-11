@@ -1,9 +1,9 @@
+import { ChakraProvider } from '@chakra-ui/react';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import { App } from "./App";
-import { ChakraProvider } from '@chakra-ui/react'
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import "./index.css";
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
 

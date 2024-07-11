@@ -1,4 +1,4 @@
-import { PokemonDetail } from "@/pages/PokemonDetail";
+import { PokemonDetail } from "@/pages/PokemonDetail/PokemonDetail";
 import { PokemonList } from "@/pages/PokemonList";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ROUTES } from "./router";
