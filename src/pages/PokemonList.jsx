@@ -36,7 +36,7 @@ export const PokemonList = () => {
       <VStack spacing={4}>
         <List spacing={3} w="100%" minH={400}>
           {pokemonList?.map((poke, index) => (
-            <ListItem onClick={() => navigate(ROUTES.pokemonDetail + `/${(index + 1) + page * PER_PAGE}`)} key={poke.name} p={2} borderWidth="1px" borderRadius="md" display="flex" alignItems="center" cursor={"pointer"}>
+            <ListItem onClick={() => navigate(ROUTES.pokemonDetail + `/${poke.id}`)} key={poke.name} p={2} borderWidth="1px" borderRadius="md" display="flex" alignItems="center" cursor={"pointer"}>
               <Image
                 boxSize="50px"
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png`}
