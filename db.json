@@ -5242,6 +5242,24 @@
       "pokemonId": "54",
       "content": "I love this one",
       "author": "me"
+    },
+    {
+      "id": "981f",
+      "pokemonId": "26",
+      "content": "This is a cool pokemon",
+      "author": "me"
+    },
+    {
+      "id": "3cb7",
+      "pokemonId": "26",
+      "content": "This is a greeeeat pokemon !",
+      "author": "me"
+    },
+    {
+      "id": "9c2f",
+      "pokemonId": "52",
+      "content": "This is a cool pokemon",
+      "author": "me"
     }
   ]
 }
