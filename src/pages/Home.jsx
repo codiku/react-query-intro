@@ -1,6 +1,8 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, List, ListItem } from "@chakra-ui/react";
 import { PokemonAPI } from "../api/pokemon-api"
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../router"
 export const Home = () => {
 
   const { data: pokemonList, error, isLoading } = useQuery({
@@ -17,9 +19,9 @@ export const Home = () => {
   }
   return (
 
-    <Box>
-      {JSON.stringify(pokemonList)}
-    </Box>
+    <List>
+      {pokemonList.map((pokemon => <ListItem key={pokemon.id}><Link to={ROUTES.detail + "/" + pokemon.id}>{pokemon.name}</Link></ListItem>))}
+    </List>
 
   );
 };
