@@ -1,34 +1,19 @@
 import { Box, Text } from "@chakra-ui/react";
-import { useState } from "react";
 import { PokemonAPI } from "../api/pokemon-api"
-import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 export const Home = () => {
-  const [pokemonList, setPokemonList] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
-  async function loadPokemons() {
-    try {
-      setIsLoading(true)
-      const pokemonResponse = await PokemonAPI.fetchPokemons(1, 151)
-      setPokemonList(pokemonResponse)
-
-    } catch (err) {
-      setErrorMessage(err.message)
-
-    } finally {
-      setIsLoading(false)
-    }
-  }
-  useEffect(() => {
-    loadPokemons()
-  }, []);
+  const { data: pokemonList, error, isLoading } = useQuery({
+    queryKey: ["pokemons"],
+    queryFn: () => PokemonAPI.fetchPokemons(1, 151)
+  })
 
   if (isLoading) {
     return <div>Loading...</div>
   }
-  if (errorMessage) {
-    return <div>Oups : {errorMessage}</div>
+
+  if (error) {
+    return <div>Oups : {error.message}</div>
   }
   return (
 
