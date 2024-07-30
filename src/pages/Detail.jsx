@@ -10,7 +10,7 @@ import {
   Image,
   Flex,
 } from "@chakra-ui/react";
-import ReviewList from "../features/ReviewList/ReviewList";
+import { ReviewList } from "../features/ReviewList/ReviewList";
 
 export function Detail() {
   const { id } = useParams();

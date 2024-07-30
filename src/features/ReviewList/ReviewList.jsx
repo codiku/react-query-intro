@@ -10,11 +10,11 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { PokemonAPI } from "../../api/pokemon-api";
 
-const ReviewList = ({ pokemonId }) => {
+export const ReviewList = ({ pokemonId }) => {
   const {
     data: reviews = [],
     error,
-    isFetching,
+    isLoading,
   } = useQuery({
     queryKey: ["reviews", "pokemonId-" + pokemonId],
     queryFn: () => PokemonAPI.fetchReviewsByPokemon(pokemonId),
@@ -38,7 +38,7 @@ const ReviewList = ({ pokemonId }) => {
           </Text>
         </ListItem>
       ))}
-      {isFetching &&
+      {isLoading &&
         [...Array(5)].map((_, index) => (
           <ListItem key={index}>
             <Skeleton height="68px" />
@@ -50,5 +50,3 @@ const ReviewList = ({ pokemonId }) => {
     </List>
   );
 };
-
-export default ReviewList;
