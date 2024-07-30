@@ -36,7 +36,7 @@ export function ReviewList({ pokemonId }) {
           </ListItem>
         ))
       ) : reviews?.length === 0 ? (
-        <Text>No reviews found. be the first to create one !</Text>
+        <Text>No reviews found. Be the first to create one !</Text>
       ) : (
         reviews.map((review) => (
           <ListItem key={review.id} p={3} shadow={"md"} borderWidth={"1px"}>
