@@ -10,6 +10,7 @@ import {
   Image,
   Flex,
 } from "@chakra-ui/react";
+import ReviewList from "../features/ReviewList/ReviewList";
 
 export function Detail() {
   const { id } = useParams();
@@ -37,33 +38,38 @@ export function Detail() {
     );
   }
   return (
-    <Flex w={"100%"} justifyContent={"center"} mt={5}>
-      <Flex
-        p={5}
-        w={400}
-        bg="gray.50"
-        borderRadius="md"
-        boxShadow={"lg"}
-        flexDirection={"column"}
-        alignItems={"center"}
-      >
-        <Heading mb={4}>{pokemon.name}</Heading>
-        <Box>
-          <Image
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
-            alt="pokemon image"
-          />
-        </Box>
-        <Flex gap={3} flexDirection={"column"} alignItems={"center"}>
-          <Text fontSize={"lg"} textAlign={"center"}>
-            <strong>Types</strong> <Box>{pokemon.types.join(", ")}</Box>
-          </Text>
-          <Text fontSize={"lg"} textAlign={"center"}>
-            <strong>Abilities</strong>
-            <Box> {pokemon.moves.map((move) => move.name).join(", ")}</Box>
-          </Text>
+    <Flex flexDirection={"column"} alignItems={"center"}>
+      <Flex w={"100%"} justifyContent={"center"} mt={5}>
+        <Flex
+          p={5}
+          w={400}
+          bg="gray.50"
+          borderRadius="md"
+          boxShadow={"lg"}
+          flexDirection={"column"}
+          alignItems={"center"}
+        >
+          <Heading mb={4}>{pokemon.name}</Heading>
+          <Box>
+            <Image
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+              alt="pokemon image"
+            />
+          </Box>
+          <Flex gap={3} flexDirection={"column"} alignItems={"center"}>
+            <Text fontSize={"lg"} textAlign={"center"}>
+              <strong>Types</strong> <Box>{pokemon.types.join(", ")}</Box>
+            </Text>
+            <Text fontSize={"lg"} textAlign={"center"}>
+              <strong>Abilities</strong>
+              <Box> {pokemon.moves.map((move) => move.name).join(", ")}</Box>
+            </Text>
+          </Flex>
         </Flex>
       </Flex>
+      <Box mt={5}>
+        <ReviewList pokemonId={id} />
+      </Box>
     </Flex>
   );
 }
