@@ -26,11 +26,14 @@ export function Detail() {
     staleTime: 60000,
   });
   const queryClient = useQueryClient();
-  const { data: createdReview, mutate: createReview } = useMutation({
+  const { mutate: createReview } = useMutation({
     mutationKey: ["addReview"],
     mutationFn: (reviewContent) => PokemonAPI.addReview(id, reviewContent),
-    onSettled: () => {
-      queryClient.invalidateQueries(["reviews", "pokemonId-" + id]);
+    onSettled: (createdReview) => {
+      queryClient.setQueryData(["reviews", "pokemonId-" + id], (oldReviews) => [
+        ...oldReviews,
+        createdReview,
+      ]);
     },
   });
   const createReviewAndRefetch = async (reviewContent) => {
