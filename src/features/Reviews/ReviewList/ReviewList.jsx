@@ -11,26 +11,31 @@ import { useMutationState, useQuery } from "@tanstack/react-query";
 import { PokemonAPI } from "../../../api/pokemon-api";
 import { useRef } from "react";
 import { useEffect } from "react";
-export const ReviewList = ({ pokemonId }) => {
-  const reviewListRef = useRef(null);
-
+export function ReviewList({ pokemonId }) {
+  const listRef = useRef();
   const {
     data: reviews = [],
     isLoading,
-    isPending,
     error,
   } = useQuery({
     queryKey: ["reviews", "pokemonId-" + pokemonId],
     queryFn: () => PokemonAPI.fetchReviewsByPokemon(pokemonId),
   });
 
-  const optimisticReviewContent = useMutationState({
+  const optimisticsReviewContent = useMutationState({
     filters: {
       mutationKey: ["addReview"],
       status: "pending",
     },
     select: (mutation) => mutation.state.variables,
   });
+
+  useEffect(() => {
+    listRef.current.scrollTo({
+      top: listRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [optimisticsReviewContent.length]);
 
   if (error) {
     return (
@@ -50,7 +55,7 @@ export const ReviewList = ({ pokemonId }) => {
   }, [optimisticReviewContent]);
 
   return (
-    <List overflowY="auto" height="300px" width="400px" ref={reviewListRef}>
+    <List spacing={3} h={300} overflowY={"auto"} w={400} ref={listRef}>
       {isLoading ? (
         [...Array(5)].map((_, i) => (
           <ListItem key={`skeleton-${i}`} mb={2}>
@@ -77,17 +82,9 @@ export const ReviewList = ({ pokemonId }) => {
           </ListItem>
         ))
       )}
-      {optimisticReviewContent.length > 0 && (
-        <ListItem
-          opacity={0.5}
-          p={3}
-          boxShadow="sm"
-          borderWidth="1px"
-          mb={2}
-          borderRadius="md"
-          bg="white"
-        >
-          {optimisticReviewContent}
+      {optimisticsReviewContent.length > 0 && (
+        <ListItem opacity={0.5} p={3} shadow={"md"} borderWidth={"1px"}>
+          {optimisticsReviewContent[0]}
           <Text fontSize={"xs"} color="gray.500">
             Me
           </Text>
@@ -95,4 +92,4 @@ export const ReviewList = ({ pokemonId }) => {
       )}
     </List>
   );
-};
+}

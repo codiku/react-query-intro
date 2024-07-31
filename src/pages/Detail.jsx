@@ -12,7 +12,6 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { ReviewList } from "../features/Reviews/ReviewList/ReviewList";
-import { useRef } from "react";
 
 export function Detail() {
   const { id } = useParams();
@@ -23,17 +22,20 @@ export function Detail() {
   } = useQuery({
     queryKey: ["pokemon", id],
     queryFn: () => PokemonAPI.fetchPokemon(id),
-    staleTime: 60000,
+    staleTime: Infinity,
   });
   const queryClient = useQueryClient();
   const { mutate: createReview } = useMutation({
     mutationKey: ["addReview"],
     mutationFn: (reviewContent) => PokemonAPI.addReview(id, reviewContent),
-    onSettled: (createdReview) => {
-      queryClient.setQueryData(["reviews", "pokemonId-" + id], (oldReviews) => [
-        ...oldReviews,
-        createdReview,
-      ]);
+    onSettled: (reviewResponse) => {
+      // queryClient.invalidateQueries({
+      //   queryKey: ["reviews", "pokemonId-" + id],
+      // });
+      queryClient.setQueryData(
+        ["reviews", "pokemonId-" + id],
+        (oldReviewList) => [...oldReviewList, reviewResponse]
+      );
     },
   });
   const createReviewAndRefetch = async (reviewContent) => {
