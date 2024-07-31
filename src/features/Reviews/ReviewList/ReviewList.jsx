@@ -12,7 +12,7 @@ import { PokemonAPI } from "../../../api/pokemon-api";
 export function ReviewList({ pokemonId }) {
   const {
     data: reviews = [],
-    isLoading,
+    isFetching,
     error,
   } = useQuery({
     queryKey: ["reviews", "pokemonId-" + pokemonId],
@@ -29,7 +29,7 @@ export function ReviewList({ pokemonId }) {
   }
   return (
     <List spacing={3} h={300} overflowY={"auto"} w={400}>
-      {isLoading ? (
+      {isFetching ? (
         [...Array(5)].map((_, i) => (
           <ListItem key={"skeleton" + i}>
             <Skeleton height={"67.81px"} />
