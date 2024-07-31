@@ -25,7 +25,6 @@ export const PokemonAPI = {
     }
   },
   async fetchPokemon(pokemonId) {
-    console.log("sending request fetchPokemon", pokemonId);
     try {
       await sleep();
       const response = await axios.get(
