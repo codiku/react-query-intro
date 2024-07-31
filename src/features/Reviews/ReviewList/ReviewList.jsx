@@ -7,16 +7,29 @@ import {
   Alert,
   AlertIcon,
 } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutationState, useQuery } from "@tanstack/react-query";
 import { PokemonAPI } from "../../../api/pokemon-api";
-export function ReviewList({ pokemonId }) {
+import { useRef } from "react";
+import { useEffect } from "react";
+export const ReviewList = ({ pokemonId }) => {
+  const reviewListRef = useRef(null);
+
   const {
     data: reviews = [],
     isLoading,
+    isPending,
     error,
   } = useQuery({
     queryKey: ["reviews", "pokemonId-" + pokemonId],
     queryFn: () => PokemonAPI.fetchReviewsByPokemon(pokemonId),
+  });
+
+  const optimisticReviewContent = useMutationState({
+    filters: {
+      mutationKey: ["addReview"],
+      status: "pending",
+    },
+    select: (mutation) => mutation.state.variables,
   });
 
   if (error) {
@@ -27,11 +40,20 @@ export function ReviewList({ pokemonId }) {
       </Alert>
     );
   }
+  useEffect(() => {
+    if (optimisticReviewContent.length > 0) {
+      reviewListRef.current.scrollTo({
+        top: reviewListRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [optimisticReviewContent]);
+
   return (
-    <List spacing={3} h={300} overflowY={"auto"} w={400}>
+    <List overflowY="auto" height="300px" width="400px" ref={reviewListRef}>
       {isLoading ? (
         [...Array(5)].map((_, i) => (
-          <ListItem key={"skeleton" + i}>
+          <ListItem key={`skeleton-${i}`} mb={2}>
             <Skeleton height={"67.81px"} />
           </ListItem>
         ))
@@ -39,14 +61,38 @@ export function ReviewList({ pokemonId }) {
         <Text>No reviews found. Be the first to create one !</Text>
       ) : (
         reviews.map((review) => (
-          <ListItem key={review.id} p={3} shadow={"md"} borderWidth={"1px"}>
-            {review.content}
+          <ListItem
+            key={review.id}
+            p={3}
+            boxShadow="sm"
+            borderWidth="1px"
+            mb={2}
+            borderRadius="md"
+            bg="white"
+          >
+            <Text>{review.content}</Text>
             <Text fontSize={"xs"} color="gray.500">
               {review.author}
             </Text>
           </ListItem>
         ))
       )}
+      {optimisticReviewContent.length > 0 && (
+        <ListItem
+          opacity={0.5}
+          p={3}
+          boxShadow="sm"
+          borderWidth="1px"
+          mb={2}
+          borderRadius="md"
+          bg="white"
+        >
+          {optimisticReviewContent}
+          <Text fontSize={"xs"} color="gray.500">
+            Me
+          </Text>
+        </ListItem>
+      )}
     </List>
   );
-}
+};
