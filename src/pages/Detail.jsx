@@ -12,10 +12,10 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { ReviewList } from "../features/Reviews/ReviewList/ReviewList";
-import { useRef } from "react";
 
 export function Detail() {
   const { id } = useParams();
+  const queryClient = useQueryClient();
   const {
     data: pokemon,
     error,
@@ -25,17 +25,14 @@ export function Detail() {
     queryFn: () => PokemonAPI.fetchPokemon(id),
     staleTime: 60000,
   });
-  const queryClient = useQueryClient();
-  const { data: createdReview, mutate: createReview } = useMutation({
+  const { mutate: addReview } = useMutation({
     mutationKey: ["addReview"],
     mutationFn: (reviewContent) => PokemonAPI.addReview(id, reviewContent),
     onSettled: () => {
       queryClient.invalidateQueries(["reviews", "pokemonId-" + id]);
     },
   });
-  const createReviewAndRefetch = async (reviewContent) => {
-    createReview(reviewContent);
-  };
+
   if (isLoading) {
     return (
       <Center h="100vh">
@@ -95,7 +92,7 @@ export function Detail() {
         placeholder="Add a review"
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            createReviewAndRefetch(e.target.value);
+            addReview(e.target.value);
           }
         }}
       />
