@@ -1,13 +1,10 @@
-import { Box, Text, List, ListItem, Image, Container } from "@chakra-ui/react";
+import { List, ListItem, Container, Image } from "@chakra-ui/react";
 import { PokemonAPI } from "../api/pokemon-api";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
 import { ROUTES } from "../router";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useState } from "react";
 const PER_PAGE = 5;
-const MAX_PAGE = 20;
 
 export const Home = () => {
   const [page, setPage] = useState(1);
@@ -30,34 +27,26 @@ export const Home = () => {
   }
   return (
     <Container mt={10}>
-      <List spacing={3} w="100%" minH={400}>
-        {pokemonList?.map((poke, index) => (
+      <List spacing={3} w="100%">
+        {pokemonList.map((pokemon) => (
           <ListItem
-            onClick={() => navigate(ROUTES.detail + `/${poke.id}`)}
-            key={poke.name}
+            onClick={() => navigate(ROUTES.detail + "/" + pokemon.id)}
+            key={pokemon.id}
             p={2}
-            borderWidth="1px"
-            borderRadius="md"
-            display="flex"
-            alignItems="center"
+            borderWidth={"1px"}
+            borderRadius={"md"}
+            display={"flex"}
+            alignItems={"center"}
             cursor={"pointer"}
           >
             <Image
-              boxSize="50px"
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png`}
-              alt={poke.name}
-              mr={4}
+              boxSize={"50px"}
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+              alt="pokemon image"
             />
-            {poke.name}
+            {pokemon.name}
           </ListItem>
         ))}
-        {isLoading &&
-          [...Array(PER_PAGE)].map((_, index) => (
-            <ListItem key={index}>
-              <Skeleton height="68px" />
-            </ListItem>
-          ))}
-        {error && <Text>Error fetching data</Text>}
       </List>
     </Container>
   );
