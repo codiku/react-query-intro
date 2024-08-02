@@ -46,13 +46,13 @@ export function ReviewList({ pokemonId }) {
     );
   }
   useEffect(() => {
-    if (optimisticReviewContent.length > 0) {
-      reviewListRef.current.scrollTo({
-        top: reviewListRef.current.scrollHeight,
+    if (optimisticsReviewContent.length > 0) {
+      listRef.current.scrollTo({
+        top: listRef.current.scrollHeight,
         behavior: "smooth",
       });
     }
-  }, [optimisticReviewContent]);
+  }, [optimisticsReviewContent]);
 
   return (
     <List spacing={3} h={300} overflowY={"auto"} w={400} ref={listRef}>
