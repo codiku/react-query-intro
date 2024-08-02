@@ -56,40 +56,36 @@ export function Detail() {
     );
   }
 
-  const pokemonCard = (
-    <Flex w={"100%"} justifyContent={"center"} mt={5}>
-      <Flex
-        p={5}
-        w={400}
-        bg="gray.50"
-        borderRadius="md"
-        boxShadow={"lg"}
-        flexDirection={"column"}
-        alignItems={"center"}
-      >
-        <Heading mb={4}>{pokemon.name}</Heading>
-        <Box>
-          <Image
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
-            alt="pokemon image"
-          />
-        </Box>
-        <Flex gap={3} flexDirection={"column"} alignItems={"center"}>
-          <Text fontSize={"lg"} textAlign={"center"}>
-            <strong>Types</strong> {pokemon.types.join(", ")}
-          </Text>
-          <Text fontSize={"lg"} textAlign={"center"}>
-            <strong>Abilities</strong>
-            {pokemon.moves.map((move) => move.name).join(", ")}
-          </Text>
-        </Flex>
-      </Flex>
-    </Flex>
-  );
-
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>
-      {pokemonCard}
+      <Flex w={"100%"} justifyContent={"center"} mt={5}>
+        <Flex
+          p={5}
+          w={400}
+          bg="gray.50"
+          borderRadius="md"
+          boxShadow={"lg"}
+          flexDirection={"column"}
+          alignItems={"center"}
+        >
+          <Heading mb={4}>{pokemon.name}</Heading>
+          <Box>
+            <Image
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+              alt="pokemon image"
+            />
+          </Box>
+          <Flex gap={3} flexDirection={"column"} alignItems={"center"}>
+            <Text fontSize={"lg"} textAlign={"center"}>
+              <strong>Types</strong> {pokemon.types.join(", ")}
+            </Text>
+            <Text fontSize={"lg"} textAlign={"center"}>
+              <strong>Abilities</strong>
+              {pokemon.moves.map((move) => move.name).join(", ")}
+            </Text>
+          </Flex>
+        </Flex>
+      </Flex>
       <Box mt={5}>
         <ReviewList pokemonId={id} />
       </Box>
