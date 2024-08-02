@@ -1,49 +1,66 @@
-import originalAxios from "axios";
+import axios from "axios";
 
-export const axios = originalAxios.create();
-axios.interceptors.response.use(async (response) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  return response;
-});
-
+async function sleep() {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, 1000);
+  });
+  return promise;
+}
 
 export const PokemonAPI = {
   async fetchPokemons(page, perPage) {
     try {
+      await sleep();
       const response = await axios.get(
-        `http://localhost:3090/pokemons?_page=${page}&_per_page=${perPage}`
+        `${
+          import.meta.env.VITE_POKEMON_API_URL
+        }/pokemons?_page=${page}&_per_page=${perPage}`
       );
+
       return response.data.data;
-    } catch (error) {
+    } catch (err) {
       throw Error("Error fetching pokemons");
     }
   },
-  async fetchPokemon(id) {
+  async fetchPokemon(pokemonId) {
     try {
-      const response = await axios.get(`http://localhost:3090/pokemons/${id}`);
+      await sleep();
+      const response = await axios.get(
+        `${import.meta.env.VITE_POKEMON_API_URL}/pokemons/${pokemonId}`
+      );
+
       return response.data;
-    } catch (error) {
+    } catch (err) {
       throw Error("Error fetching pokemon");
     }
   },
-  async fetchReviewsByPokemonId(id) {
+  async fetchReviewsByPokemon(pokemonId) {
     try {
-      const response = await axios.get(`http://localhost:3090/reviews?pokemonId=${id}`);
+      await sleep();
+      const response = await axios.get(
+        `${import.meta.env.VITE_POKEMON_API_URL}/reviews?pokemonId=${pokemonId}`
+      );
       return response.data;
-    } catch (error) {
-      throw Error("Error fetching reviews");
+    } catch (err) {
+      throw Error("Error fetching reviews for pokemon " + pokemonId);
     }
   },
-  async addReview(pokemonId, content) {
+  async addReview(pokemonId, reviewContent) {
     try {
-      const response = await axios.post(`http://localhost:3090/reviews`, {
-        pokemonId,
-        content,
-        author:"me"
-      });
+      await sleep();
+      const response = await axios.post(
+        `${import.meta.env.VITE_POKEMON_API_URL}/reviews`,
+        {
+          pokemonId,
+          content: reviewContent,
+          author: "Me",
+        }
+      );
       return response.data;
-    } catch (error) {
-      throw Error("Error adding review");
+    } catch (err) {
+      throw Error("Error adding review for pokemon " + pokemonId);
     }
   },
 };
