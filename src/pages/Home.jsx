@@ -33,18 +33,6 @@ export const Home = () => {
   if (error) {
     return <div>Oups : {error.message}</div>;
   }
-
-  const loadPreviousPage = () => {
-    if (page > 1) {
-      setPage((oldPage) => oldPage - 1);
-    }
-  };
-
-  const loadNextPage = () => {
-    if (page < MAX_PAGE) {
-      setPage((oldPage) => oldPage + 1);
-    }
-  };
   return (
     <Container mt={10}>
       <List spacing={3} w="100%">
@@ -82,15 +70,14 @@ export const Home = () => {
           Load next page
         </Button>
       </HStack>
-      <Center mt={4}>
-        {Array.from({ length: MAX_PAGE }).map((_, index) => (
+      <Center mt={10}>
+        {Array.from({ length: MAX_PAGE }).map((_, i) => (
           <Button
-            variant={page === index + 1 ? "solid" : "link"}
-            key={index}
-            onClick={() => setPage(index + 1)}
-            w={"24"}
+            variant={page == i + 1 ? "solid" : "link"}
+            key={i}
+            onClick={() => setPage(i + 1)}
           >
-            {index + 1}
+            {i + 1}
           </Button>
         ))}
       </Center>
