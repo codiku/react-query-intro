@@ -53,7 +53,7 @@ export const PokemonAPI = {
       const response = await axios.post(
         `${import.meta.env.VITE_POKEMON_API_URL}/reviews`,
         {
-          pokemonId,
+          pokemonId: Number(pokemonId),
           content: reviewContent,
           author: "Me",
         }

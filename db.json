@@ -5260,6 +5260,25 @@
       "pokemonId": 52,
       "content": "This is a cool pokemon",
       "author": "me"
+    },
+    {
+      "id": "740d",
+      "pokemonId": 3,
+      "content": "This is a test",
+      "author": "Me"
+    },
+    {
+      "pokemonId": 3,
+      "content": "This one is not returned",
+      "author": "Me",
+      "id": "2u7Zzz3KzOs"
+    },
+    {
+      "pokemonId": 3,
+      "content": "HMMMMMM",
+      "author": "Me",
+      "id": "iuNHcHv4XL4"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

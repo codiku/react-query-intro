@@ -33,6 +33,13 @@ export const Home = () => {
   if (error) {
     return <div>Oups : {error.message}</div>;
   }
+
+  const loadPreviousPage = () => {
+    setPage(page - 1);
+  };
+  const loadNextPage = () => {
+    setPage(page + 1);
+  };
   return (
     <Container mt={10}>
       <List spacing={3} w="100%">
