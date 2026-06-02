@@ -5197,75 +5197,69 @@
     },
     {
       "id": "440d",
-      "pokemonId": "3",
+      "pokemonId": 3,
       "content": "Whhhat",
       "author": "me"
     },
     {
       "id": "b0bc",
-      "pokemonId": "3",
+      "pokemonId": 3,
       "content": "Whhhatniceee",
       "author": "me"
     },
     {
       "id": "44d1",
-      "pokemonId": "3",
+      "pokemonId": 3,
       "content": "coool",
       "author": "me"
     },
     {
       "id": "324a",
-      "pokemonId": "3",
+      "pokemonId": 3,
       "content": "ok",
       "author": "me"
     },
     {
       "id": "1fd8",
-      "pokemonId": "3",
+      "pokemonId": 3,
       "content": "okkk",
       "author": "me"
     },
     {
       "id": "cabc",
-      "pokemonId": "1",
+      "pokemonId": 1,
       "content": "Cool",
       "author": "me"
     },
     {
       "id": "c870",
-      "pokemonId": "1",
+      "pokemonId": 1,
       "content": "Cool",
       "author": "me"
     },
     {
       "id": "e46b",
-      "pokemonId": "54",
+      "pokemonId": 54,
       "content": "I love this one",
       "author": "me"
     },
     {
       "id": "981f",
-      "pokemonId": "26",
+      "pokemonId": 26,
       "content": "This is a cool pokemon",
       "author": "me"
     },
     {
       "id": "3cb7",
-      "pokemonId": "26",
+      "pokemonId": 26,
       "content": "This is a greeeeat pokemon !",
       "author": "me"
     },
     {
       "id": "9c2f",
-      "pokemonId": "52",
+      "pokemonId": 52,
       "content": "This is a cool pokemon",
       "author": "me"
-    },
-    {
-      "id": "740d",
-      "pokemonId": 3,
-      "content": "This is a test",
-      "author": "Me"
     }
   ]
 }
